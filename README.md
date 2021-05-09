@@ -141,7 +141,7 @@ Below is the install-elk.yml file:
 ```
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-https://github.com/abmoggy/Project-1-UCLA-Bootcamp/blob/main/docker-ps-in-elk-server_SAVE.JPG
+![image](https://user-images.githubusercontent.com/29813114/117566720-8ecf9b80-b0e2-11eb-8121-ea780dac9aab.png)
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
