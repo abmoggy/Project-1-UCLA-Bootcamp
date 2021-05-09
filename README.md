@@ -41,6 +41,7 @@ The configuration details of each machine may be found below.
 | web-2                 | Web Server | 10.0.0.5   | Linux            |
 | web-3                 | Web Server | 10.0.0.7   | Linux            |
 | elk-server            | Monitoring | 10.1.0.4   | Linux            |
+
 ### Access Policies
 
 The machines on the internal network are not exposed to the public Internet. Those that have IP Address of 10.*.0.* are internal private IP networks.
@@ -79,74 +80,77 @@ File location for the ansible playbook file to install elk server:
 root@a61338b7ce1f:/etc/ansible/install-elk.yml
 
 Below is the install-elk.yml file:
-
- ---
- - name: Configure Elk VM with Docker
-   hosts: elk
-   remote_user: sysadmin
-   become: true
-   tasks:
-     # Use apt module
-     - name: Install docker.io
-       apt:
-         update_cache: yes
-         force_apt_get: yes
-         name: docker.io
-         state: present
-
-       # Use apt module
-     - name: Install python3-pip
-       apt:
-         force_apt_get: yes
-         name: python3-pip
-         state: present
-
-       # Use pip module (It will default to pip3)
-     - name: Install Docker module
-       pip:
-         name: docker
-         state: present
-
-       # Use command module
-     - name: Increase virtual memory
-       command: "sysctl -w vm.max_map_count=262144"
-
-       # Use sysctl module
-     - name: Use more memory
-       sysctl:
-         name: vm.max_map_count
-         value: '262144'
-         state: present
-         reload: yes
-
-       # Use docker_container module
-     - name: download and launch a docker elk container
-       docker_container:
-         name: elk
-         image: sebp/elk:761
-         state: started
-         restart_policy: always
-         # Please list the ports that ELK runs on
-         published_ports:
-         - 5601:5601
-         - 9200:9200
-         - 5044:5044
-
-       # Use systemd module
-     - name: Enable service docker on boot
-       systemd:
-         name: docker
-         enabled: yes
-
+```
+ 1 ---
+ 2 - name: Configure Elk VM with Docker
+ 3   hosts: elk
+ 4   remote_user: sysadmin
+ 5   become: true
+ 6   tasks:
+ 7     # Use apt module
+ 8     - name: Install docker.io
+ 9       apt:
+10         update_cache: yes
+11         force_apt_get: yes
+12         name: docker.io
+13         state: present
+14
+15       # Use apt module
+16     - name: Install python3-pip
+17       apt:
+18         force_apt_get: yes
+19         name: python3-pip
+20         state: present
+21
+22       # Use pip module (It will default to pip3)
+23     - name: Install Docker module
+24       pip:
+25         name: docker
+26         state: present
+27
+28       # Use command module
+29     - name: Increase virtual memory
+30       command: "sysctl -w vm.max_map_count=262144"
+31
+32       # Use sysctl module
+33     - name: Use more memory
+34       sysctl:
+35         name: vm.max_map_count
+36         value: '262144'
+37         state: present
+38         reload: yes
+39
+40       # Use docker_container module
+41     - name: download and launch a docker elk container
+42       docker_container:
+43         name: elk
+44         image: sebp/elk:761
+45         state: started
+46         restart_policy: always
+47         # Please list the ports that ELK runs on
+48         published_ports:
+49         - 5601:5601
+50         - 9200:9200
+51         - 5044:5044
+52
+53       # Use systemd module
+54     - name: Enable service docker on boot
+55       systemd:
+56         name: docker
+57         enabled: yes
+```
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
 https://github.com/abmoggy/Project-1-UCLA-Bootcamp/blob/main/docker-ps-in-elk-server_SAVE.JPG
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
-| web-1   | 10.0.0.4   | DVWA1 
-| web-2   | 10.0.0.5   | DVWA2
-| web-3   | 10.0.0.7   | DVWA3
+
+| Name    | Private IP Address | Docker Container|
+|---------|--------------------|-----------------|
+| web-1   | 10.0.0.4           | DVWA1           |
+| web-2   | 10.0.0.5           | DVWA2           |
+| web-3   | 10.0.0.7           | DVWA3           |
 
 We have installed the following Beats on these machines:
 web-1
@@ -203,7 +207,7 @@ root@a61338b7ce1f:/etc/ansible/files/filebeat-playbook.yml
 
 Metricbeat playbook file:
  root@a61338b7ce1f:/etc/ansible/files/metricbeat-playbook.yml
- 
+``` 
  1 ---
  2 - name: Install metric beat
  3   hosts: webservers
@@ -240,7 +244,7 @@ Metricbeat playbook file:
 34     systemd:
 35       name: metricbeat
 36       enabled: yes
-
+```
 ### Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
