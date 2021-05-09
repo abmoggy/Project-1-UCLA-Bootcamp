@@ -158,14 +158,15 @@ web-2
 web-3
 
 The elk server successfully received from this filebeat module
-https://github.com/abmoggy/Project-1-UCLA-Bootcamp/blob/main/successful-elk-data-verification.JPG
+
+![image](https://user-images.githubusercontent.com/29813114/117566803-f5ed5000-b0e2-11eb-9877-4ac75dc46caf.png)
 
 These Beats allow us to collect the following information from each machine:
 - FILEBEAT: Detects and logs any changes made to the file system, (in this instance Apache logs)on that machine and send those logs data to ELK stak server for analysis.
 
 Filebeat playbook file:
 root@a61338b7ce1f:/etc/ansible/files/filebeat-playbook.yml
-
+```
  1 ---
  2 - name: Installing and Launch Filebeat
  3   hosts: webservers
@@ -202,7 +203,7 @@ root@a61338b7ce1f:/etc/ansible/files/filebeat-playbook.yml
 34     systemd:
 35       name: filebeat
 36       enabled: yes
-
+```
 - METRICBEAT: Detects and logs changes made the the system or services.  We can then use these metrics to monitor different parameters such as CPU, memory, IO loads, SSH login attemps, SUDO requests.  
 
 Metricbeat playbook file:
@@ -260,7 +261,7 @@ One can specify which machine to install the ELK server on versus which to insta
 - http://10.1.0.4:5601/app/kibana is the url to check that the ELK server is running.
 
 _As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc.
-
+```
 # SSH to Jumpbox-provisioner from home pc
 $ ssh azureuser@52.234.218.240
 jumpbox-provisioner public IP Address is: 52.234.218.240
@@ -331,4 +332,4 @@ $ ansible-playbook metricbeat-playbook.yml
 $ curl http://10.1.0.0.4:5601/app/kibana
 
 # This should print a HTML onto the console showing that it is up and running. You can then visit the site at http://:20.94.200.1615601/app/kibana to check if the elk stack is running correctly.
-
+```
