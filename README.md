@@ -77,8 +77,9 @@ The playbook implements the following tasks:
 - Mapping the required ports (published) for elk to operate
 
 File location for the ansible playbook file to install elk server:
+```
 root@a61338b7ce1f:/etc/ansible/install-elk.yml
-
+```
 Below is the install-elk.yml file:
 ```
  1 ---
@@ -165,7 +166,9 @@ These Beats allow us to collect the following information from each machine:
 - FILEBEAT: Detects and logs any changes made to the file system, (in this instance Apache logs)on that machine and send those logs data to ELK stak server for analysis.
 
 Filebeat playbook file:
+```
 root@a61338b7ce1f:/etc/ansible/files/filebeat-playbook.yml
+```
 ```
  1 ---
  2 - name: Installing and Launch Filebeat
@@ -207,8 +210,10 @@ root@a61338b7ce1f:/etc/ansible/files/filebeat-playbook.yml
 - METRICBEAT: Detects and logs changes made the the system or services.  We can then use these metrics to monitor different parameters such as CPU, memory, IO loads, SSH login attemps, SUDO requests.  
 
 Metricbeat playbook file:
+```
  root@a61338b7ce1f:/etc/ansible/files/metricbeat-playbook.yml
-``` 
+```
+```
  1 ---
  2 - name: Install metric beat
  3   hosts: webservers
@@ -265,11 +270,13 @@ _As a **Bonus**, provide the specific commands the user will need to run to down
 # SSH to Jumpbox-provisioner from home pc
 $ ssh azureuser@52.234.218.240
 jumpbox-provisioner public IP Address is: 52.234.218.240
-load-balancer       public IP Address is: 20.94.200.161
+load-balancer       public IP Address is: 20.94.200.161 
+
 # check docker container
 azureuser@jumpbox-provisioner:~$ sudo docker ps
 CONTAINER ID   IMAGE                           COMMAND   CREATED       STATUS         PORTS     NAMES
 a61338b7ce1f   cyberxsecurity/ansible:latest   "bash"    13 days ago   Up 3 seconds             epic_ptolemy
+
 # connecting (attach) to docker container
 azureuser@jumpbox-provisioner:~$ sudo docker attach epic_ptolemy
 root@a61338b7ce1f:~#
